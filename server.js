@@ -1,8 +1,13 @@
 // Bring express then Initialize it into a variable called "app"
 const express = require('express');
+const connectDB = require('./config/db');
 const app = express();
+connectDB();
 
 app.get('/', (req, res) => res.json({ msg: 'Hello ..my name is Alia' }));
+
+// Init Middleware .. in order for (req.body) to function
+app.use(express.json({ extended: false }));
 
 //Define the routes (the way we do that is with "app.use")
 app.use('/api/users', require('./routes/users'));
