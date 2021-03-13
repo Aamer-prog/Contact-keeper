@@ -1,10 +1,13 @@
 // Bring express then Initialize it into a variable called "app"
-const express = require('express');
 const connectDB = require('./config/db');
+const express = require('express');
 const app = express();
+
 connectDB();
 
-app.get('/', (req, res) => res.json({ msg: 'Hello ..my name is Alia' }));
+app.get('/', (req, res) =>
+  res.json({ msg: 'Welcome to the contact keeper API...' })
+);
 
 // Init Middleware .. in order for (req.body) to function
 app.use(express.json({ extended: false }));

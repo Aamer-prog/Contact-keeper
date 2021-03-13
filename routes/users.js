@@ -1,11 +1,13 @@
 // We need to bring in express so we can use the router
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User');
+
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const config = require('config');
 const { check, validationResult } = require('express-validator/check');
-const User = require('../models/User');
 
 // @route     POST api/users
 // @desc      Register a user
@@ -43,6 +45,7 @@ router.post(
 
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
+
       await user.save();
 
       const payload = {
